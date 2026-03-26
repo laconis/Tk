@@ -1,14 +1,19 @@
 <?php include "header.php"; ?>
 
-<div class="container mt-4">
-    <h1 class="mb-4">Dashboard</h1>
+<h1 class="mb-4">Dashboard</h1>
 
-    <div id="data-container" class="mt-3">
-        Chargement des données…
-    </div>
+<div id="data-container">
+    Chargement des données…
 </div>
 
 <script>
+function refreshData() {
+    fetch("dashboard_data.php")
+        .then(r => r.text())
+        .then(html => {
+            document.getElementById("data-container").innerHTML = html;
+        });
+}
 refreshData();
 setInterval(refreshData, 5000);
 </script>
