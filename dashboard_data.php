@@ -108,6 +108,47 @@ Plotly.newPlot('chart_action', [{
 }], { title: "Répartition par action" });
 </script>
 
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">Activité sur 7 jours</div>
+            <div class="card-body">
+                <div id="chart7"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">Activité sur 30 jours</div>
+            <div class="card-body">
+                <div id="chart30"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+Plotly.newPlot('chart7', [{
+    x: <?= json_encode($jours7) ?>,
+    y: <?= json_encode($totaux7) ?>,
+    type: 'scatter',
+    mode: 'lines+markers',
+    line: { color: 'blue' }
+}], { title: "Fichiers traités (7 jours)" });
+
+Plotly.newPlot('chart30', [{
+    x: <?= json_encode($jours30) ?>,
+    y: <?= json_encode($totaux30) ?>,
+    type: 'scatter',
+    mode: 'lines+markers',
+    line: { color: 'green' }
+}], { title: "Fichiers traités (30 jours)" });
+</script>
+
+
 <!-- TABLEAU -->
 <table>
     <tr>
