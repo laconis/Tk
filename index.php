@@ -61,6 +61,19 @@ if ($result && $result->num_rows > 0) {
 <!DOCTYPE html>
 <html>
 <head>
+
+    <script>
+function refreshData() {
+    fetch("dashboard_data.php")
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById("data-container").innerHTML = html;
+        });
+}
+
+setInterval(refreshData, 5000);
+</script>
+    
     <title>Dashboard Logs</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
