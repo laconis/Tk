@@ -4,6 +4,37 @@ $user = "root";
 $pass = "motdepasse";
 $db   = "logs_db";
 
+// --- STATISTIQUES 7 JOURS ---
+$sql7 = "SELECT DATE(date_log) AS d, COUNT(*) AS total
+         FROM logs
+         WHERE date_log >= NOW() - INTERVAL 7 DAY
+         GROUP BY d
+         ORDER BY d ASC";
+$res7 = $conn->query($sql7);
+
+$jours7 = [];
+$totaux7 = [];
+foreach ($res7 as $row) {
+    $jours7[] = $row["d"];
+    $totaux7[] = $row["total"];
+}
+
+// --- STATISTIQUES 30 JOURS ---
+$sql30 = "SELECT DATE(date_log) AS d, COUNT(*) AS total
+          FROM logs
+          WHERE date_log >= NOW() - INTERVAL 30 DAY
+          GROUP BY d
+          ORDER BY d ASC";
+$res30 = $conn->query($sql30);
+
+$jours30 = [];
+$totaux30 = [];
+foreach ($res30 as $row) {
+    $jours30[] = $row["d"];
+    $totaux30[] = $row["total"];
+}
+
+
 $conn = new mysqli($host, $user, $pass, $db);
 
 $username = isset($_GET['username']) ? $_GET['username'] : "";
